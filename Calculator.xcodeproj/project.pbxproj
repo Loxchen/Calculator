@@ -18,6 +18,7 @@
 		9655F8B116C0A15000C4FB9D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9655F8B016C0A15000C4FB9D /* Default-568h@2x.png */; };
 		9655F8B416C0A15000C4FB9D /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9655F8B216C0A15000C4FB9D /* MainStoryboard.storyboard */; };
 		9655F8B716C0A15000C4FB9D /* CalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9655F8B616C0A15000C4FB9D /* CalculatorViewController.m */; };
+		9655F8C216C0F3C200C4FB9D /* CalculatorBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 9655F8C116C0F3C200C4FB9D /* CalculatorBrain.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,8 @@
 		9655F8B316C0A15000C4FB9D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		9655F8B516C0A15000C4FB9D /* CalculatorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalculatorViewController.h; sourceTree = "<group>"; };
 		9655F8B616C0A15000C4FB9D /* CalculatorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalculatorViewController.m; sourceTree = "<group>"; };
+		9655F8C016C0F3C200C4FB9D /* CalculatorBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorBrain.h; sourceTree = "<group>"; };
+		9655F8C116C0F3C200C4FB9D /* CalculatorBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorBrain.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +92,8 @@
 				9655F8B516C0A15000C4FB9D /* CalculatorViewController.h */,
 				9655F8B616C0A15000C4FB9D /* CalculatorViewController.m */,
 				9655F8A116C0A15000C4FB9D /* Supporting Files */,
+				9655F8C016C0F3C200C4FB9D /* CalculatorBrain.h */,
+				9655F8C116C0F3C200C4FB9D /* CalculatorBrain.m */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 				9655F8A716C0A15000C4FB9D /* main.m in Sources */,
 				9655F8AB16C0A15000C4FB9D /* CalculatorAppDelegate.m in Sources */,
 				9655F8B716C0A15000C4FB9D /* CalculatorViewController.m in Sources */,
+				9655F8C216C0F3C200C4FB9D /* CalculatorBrain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
