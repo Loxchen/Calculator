@@ -10,66 +10,93 @@
 #include <math.h>
 
 @interface CalculatorBrain()
-@property (nonatomic, strong) NSMutableArray *oprerandStack;
+@property (nonatomic, strong) NSMutableArray *programStack;
 @end
 
 @implementation CalculatorBrain
 
-@synthesize oprerandStack = _oprerandStack;
+@synthesize programStack = _programStack;
 
-- (NSMutableArray *) oprerandStack
+- (NSMutableArray *) programStack
 {
-    if (_oprerandStack == nil) _oprerandStack = [[NSMutableArray alloc] init];
-    return _oprerandStack;
+    if (_programStack == nil) _programStack = [[NSMutableArray alloc] init];
+    return _programStack;
 }
 
 - (void)pushOperand:(double)operand
 {
-    [self.oprerandStack addObject:[NSNumber numberWithDouble:operand]];
-}
-
-- (double)popOperand
-{
-    NSNumber *operandObject = [self.oprerandStack lastObject];
-    if (operandObject) [self.oprerandStack removeLastObject];
-    return [operandObject doubleValue];
+    [self.programStack addObject:[NSNumber numberWithDouble:operand]];
 }
 
 - (void)clearOperand
 {
-    [self.oprerandStack removeAllObjects];
+    [self.programStack removeAllObjects];
 }
 
 - (double)performOperation:(NSString*)operation
 {
+    [self.programStack addObject:operation];
+    return [CalculatorBrain runProgram:self.program];
+}
+
+- (id)program
+{
+    return [self.programStack copy];
+}
+
++ (NSString *)descriptionOfProgram:(id)program
+{
+    return @"Implement this in Assignment 2";
+}
+
++ (double)popOperandOffStack:(NSMutableArray *)stack
+{
     double result = 0;
     
-    if ([operation isEqualToString:@"+"]) {
-        result = [self popOperand] + [self popOperand];
-    } else if ([operation isEqualToString:@"-"]){
-        double new = [self popOperand];
-        result = [self popOperand] - new;
-    } else if ([operation isEqualToString:@"*"]){
-        result = [self popOperand] * [self popOperand];
-    } else if ([operation isEqualToString:@"/"]){
-        double new = [self popOperand];
-        result = [self popOperand] / new;
-    } else if ([operation isEqualToString:@"sin"]){
-        double radian = [self popOperand];
-        result = sin(radian / 180 * M_PI);
-    } else if ([operation isEqualToString:@"cos"]){
-        double radian = [self popOperand];
-        result = cos(radian / 180 * M_PI);
-    } else if ([operation isEqualToString:@"sqrt"]){
-        result = sqrt([self popOperand]);
-    } else if ([operation isEqualToString:@"π"]){
-        result = M_PI;
-    }
+    id topOfStack = [stack lastObject];
+    if (topOfStack) [stack removeLastObject];
     
-    [self pushOperand:result];
+    if ([topOfStack isKindOfClass:[NSNumber class]]) {
+        result = [topOfStack doubleValue];
+    }
+    else if ([topOfStack isKindOfClass:[NSString class]]) {
+        NSString *operation = topOfStack;
+        if ([operation isEqualToString:@"+"]) {
+            result = [self popOperandOffStack:stack] + [self popOperandOffStack:stack];
+        } else if ([operation isEqualToString:@"-"]){
+            double new = [self popOperandOffStack:stack];
+            result = [self popOperandOffStack:stack] - new;
+        } else if ([operation isEqualToString:@"*"]){
+            result = [self popOperandOffStack:stack] * [self popOperandOffStack:stack];
+        } else if ([operation isEqualToString:@"/"]){
+            double new = [self popOperandOffStack:stack];
+            result = [self popOperandOffStack:stack] / new;
+        } else if ([operation isEqualToString:@"sin"]){
+            double radian = [self popOperandOffStack:stack];
+            result = sin(radian / 180 * M_PI);
+        } else if ([operation isEqualToString:@"cos"]){
+            double radian = [self popOperandOffStack:stack];
+            result = cos(radian / 180 * M_PI);
+        } else if ([operation isEqualToString:@"sqrt"]){
+            result = sqrt([self popOperandOffStack:stack]);
+        } else if ([operation isEqualToString:@"π"]){
+            result = M_PI;
+        }
+        
+    }
     
     return result;
 }
+
++ (double)runProgram:(id)program
+{
+    NSMutableArray *stack;
+    if ([program isKindOfClass:[NSArray class]]) {
+        stack = [program mutableCopy];
+    }
+    return [self popOperandOffStack:stack];
+}
+
 
 
 @end
